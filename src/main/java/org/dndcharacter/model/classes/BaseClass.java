@@ -10,6 +10,8 @@ public abstract class BaseClass {
     protected int hitDie;
     protected int proficiencyBonus;
     protected List<String> proficiencies = new ArrayList<>();
+    protected List<String> savingThrows = new ArrayList<>();
+    protected List<String> skills = new ArrayList<>();
 
     public String getName() {
         return name;
