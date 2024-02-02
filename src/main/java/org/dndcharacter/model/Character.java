@@ -19,6 +19,7 @@ public class Character {
     private Map<String, Integer> statModifiers = new HashMap<>();
     private SplittableRandom random = new SplittableRandom();
     private String profBonus;
+    private HashSet<String> skillProficiencies;
 
     public Character(String name, BaseClass characterClass, Race characterRace, Background background, String alignment, List<String> statNames) {
         this.name = name;
@@ -32,6 +33,7 @@ public class Character {
         setStatModifiers();
         setHp();
         setProfBonus();
+        skillProficiencies = setSkillProficiencies();
     }
 
     public Character(List<String> statNames) {
@@ -110,6 +112,17 @@ public class Character {
         hp = String.valueOf(hitPoints);
     }
 
+    private HashSet<String> setSkillProficiencies() {
+        HashSet<String> skillProficiencies = new HashSet<>();
+        for (String skill : characterClass.getSkills()) {
+            skillProficiencies.add(skill);
+        }
+        for (String skill : characterRace.getSkills()) {
+            skillProficiencies.add(skill);
+        }
+        return skillProficiencies;
+    }
+
     public Map<String, Integer> getStatModifiers() {
         return statModifiers;
     }
@@ -148,10 +161,14 @@ public class Character {
 
     public void setProfBonus() {
         int bonus = level/4 + 2;
-        profBonus = String.valueOf("+" + bonus);
+        profBonus = "+" + bonus;
     }
 
     public String getProfBonus() {
         return profBonus;
+    }
+
+    public HashSet<String> getSkillProficiencies() {
+        return skillProficiencies;
     }
 }
