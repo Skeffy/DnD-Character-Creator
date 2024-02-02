@@ -36,4 +36,24 @@ public abstract class Race {
     public String getSpeed() {
         return speed;
     }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public List<String> getLanguages() {
+        return languages;
+    }
+
+    public List<String> getProficiencies() {
+        return proficiencies;
+    }
+
+    public List<String> getFeaturesAndTraits() {
+        return featuresAndTraits;
+    }
 }
