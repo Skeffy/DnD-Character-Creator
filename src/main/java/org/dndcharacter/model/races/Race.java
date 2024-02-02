@@ -15,6 +15,7 @@ public abstract class Race {
     protected String subrace = null;
     protected List<String> proficiencies = new ArrayList<>();
     protected List<String> featuresAndTraits = new ArrayList<>();
+    protected List<String> skills = new ArrayList<>();
 
     public boolean hasSubrace() {
         return subrace != null;
