@@ -5,7 +5,6 @@ import org.dndcharacter.model.classes.BaseClass;
 import org.dndcharacter.model.races.Race;
 
 import java.util.*;
-import java.util.random.RandomGenerator;
 
 public class Character {
 
@@ -18,7 +17,7 @@ public class Character {
     private String alignment;
     private Map<String, Integer> stats = new HashMap<>();
     private Map<String, Integer> statModifiers = new HashMap<>();
-    private RandomGenerator randomGenerator = new Random();
+    private SplittableRandom random = new SplittableRandom();
     private String profBonus;
 
     public Character(String name, BaseClass characterClass, Race characterRace, Background background, String alignment, List<String> statNames) {
@@ -46,7 +45,7 @@ public class Character {
             List<Integer> rolls = new ArrayList<>();
             int total = 0;
             for (int x = 4; x > 0; x--) {
-                rolls.add(randomGenerator.nextInt(1, 6));
+                rolls.add(random.nextInt(1, 6));
             }
             Collections.sort(rolls);
             rolls.remove(0);
@@ -102,7 +101,7 @@ public class Character {
     private void setHp() {
         int hitPoints = 0;
         for (int x = 0; x < level; x++) {
-            int baseRoll = randomGenerator.nextInt(1, characterClass.getHitDie());
+            int baseRoll = random.nextInt(1, characterClass.getHitDie());
             int conMod = statModifiers.get("Constitution");
             hitPoints += baseRoll + conMod;
         }
