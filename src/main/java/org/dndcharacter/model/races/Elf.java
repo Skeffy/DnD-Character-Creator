@@ -19,6 +19,7 @@ public class Elf extends Race{
                 "of sleep.");
 
         if (subrace.equalsIgnoreCase("High Elf")) {
+            name = subrace;
             abilityScoreRacialModifier.put("Intelligence", 1);
             proficiencies.add("Longsword");
             proficiencies.add("Shortsword");
@@ -27,6 +28,7 @@ public class Elf extends Race{
             //TODO Cantrip: You know one cantrip from the wizard spell list. Int is your casting ability.
             //TODO extra language of your choice.
         } else if (subrace.equalsIgnoreCase("Wood Elf")) {
+            name = subrace;
             abilityScoreRacialModifier.put("Wisdom", 1);
             proficiencies.add("Longsword");
             proficiencies.add("Shortsword");
