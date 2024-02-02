@@ -20,4 +20,8 @@ public abstract class BaseClass {
     public int getHitDie() {
         return hitDie;
     }
+
+    public List<String> getSkills() {
+        return skills;
+    }
 }
