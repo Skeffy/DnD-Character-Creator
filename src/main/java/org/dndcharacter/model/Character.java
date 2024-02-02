@@ -99,11 +99,13 @@ public class Character {
     }
 
     private void setHp() {
-        int hitPoints = 0;
-        for (int x = 0; x < level; x++) {
-            int baseRoll = random.nextInt(1, characterClass.getHitDie());
-            int conMod = statModifiers.get("Constitution");
-            hitPoints += baseRoll + conMod;
+        int hitPoints = characterClass.getHitDie() + statModifiers.get("Constitution");
+            if (level > 1) {
+            for (int i = 1; i < level; i++) {
+                int baseRoll = random.nextInt(1, characterClass.getHitDie());
+                int conMod = statModifiers.get("Constitution");
+                hitPoints += baseRoll + conMod;
+            }
         }
         hp = String.valueOf(hitPoints);
     }
