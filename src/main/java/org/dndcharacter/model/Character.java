@@ -22,7 +22,8 @@ public class Character {
     private HashSet<String> skillProficiencies;
     private HashSet<String> languages;
 
-    public Character(String name, BaseClass characterClass, Race characterRace, Background background, String alignment, List<String> statNames) {
+    public Character(String name, BaseClass characterClass, Race characterRace, Background background, String alignment,
+                     List<String> statNames) {
         this.name = name;
         this.characterClass = characterClass;
         this.characterRace = characterRace;
@@ -36,11 +37,6 @@ public class Character {
         setProfBonus();
         skillProficiencies = setSkillProficiencies();
         languages = setLanguages();
-    }
-
-    public Character(List<String> statNames) {
-        List<Integer> unassignedStats = rollStats();
-        assignStats(statNames, unassignedStats);
     }
 
     private List<Integer> rollStats() {
@@ -116,31 +112,21 @@ public class Character {
 
     private HashSet<String> setSkillProficiencies() {
         HashSet<String> skillProficiencies = new HashSet<>();
-        for (String skill : characterClass.getSkills()) {
-            skillProficiencies.add(skill);
-        }
-        for (String skill : characterRace.getSkills()) {
-            skillProficiencies.add(skill);
-        }
-        for (String skill : background.getSkills()) {
-            skillProficiencies.add(skill);
-        }
+        skillProficiencies.addAll(characterClass.getSkills());
+        skillProficiencies.addAll(characterRace.getSkills());
+        skillProficiencies.addAll(background.getSkills());
         return skillProficiencies;
     }
 
     private HashSet<String> setLanguages() {
         HashSet<String> languages = new HashSet<>();
-        for (String language : characterRace.getLanguages()) {
-            languages.add(language);
-        }
-        for (String language : background.getLanguages()) {
-            languages.add(language);
-        }
+        languages.addAll(characterRace.getLanguages());
+        languages.addAll(background.getLanguages());
         return languages;
     }
 
     public void setProfBonus() {
-        int bonus = level/4 + 2;
+        int bonus = (int)Math.round((double)level/4 + 1);
         profBonus = "+" + bonus;
     }
 
@@ -186,5 +172,9 @@ public class Character {
 
     public HashSet<String> getSkillProficiencies() {
         return skillProficiencies;
+    }
+
+    public HashSet<String> getLanguages() {
+        return languages;
     }
 }
