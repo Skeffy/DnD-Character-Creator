@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Character {
 
-    private int level = 1;
+    private int level = 5;
     private String hp;
     private BaseClass characterClass;
     private Race characterRace;
@@ -126,7 +126,7 @@ public class Character {
     }
 
     public void setProfBonus() {
-        int bonus = (int)Math.round((double)level/4 + 1);
+        int bonus = (int)Math.ceil((double)level/4 + 1);
         profBonus = "+" + bonus;
     }
 
