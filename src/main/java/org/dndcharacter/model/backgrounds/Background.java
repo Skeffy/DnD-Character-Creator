@@ -1,33 +1,32 @@
 package org.dndcharacter.model.backgrounds;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public abstract class Background {
 
     protected String name;
-    protected List<String> proficiencies = new ArrayList<>();
-    protected List<String> skills = new ArrayList<>();
-    protected List<String> languages = new ArrayList<>();
-    protected List<String> equipment = new ArrayList<>();
+    protected HashSet<String> proficiencies = new HashSet<>();
+    protected HashSet<String> skills = new HashSet<>();
+    protected HashSet<String> languages = new HashSet<>();
+    protected HashSet<String> equipment = new HashSet<>();
 
     public String getName() {
         return name;
     }
 
-    public List<String> getProficiencies() {
+    public HashSet<String> getProficiencies() {
         return proficiencies;
     }
 
-    public List<String> getSkills() {
+    public HashSet<String> getSkills() {
         return skills;
     }
 
-    public List<String> getLanguages() {
+    public HashSet<String> getLanguages() {
         return languages;
     }
 
-    public List<String> getEquipment() {
+    public HashSet<String> getEquipment() {
         return equipment;
     }
 }
