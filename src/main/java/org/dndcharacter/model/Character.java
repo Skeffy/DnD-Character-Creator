@@ -18,9 +18,11 @@ public class Character {
     private Map<String, Integer> stats = new HashMap<>();
     private Map<String, Integer> statModifiers = new HashMap<>();
     private SplittableRandom random = new SplittableRandom();
-    private String profBonus;
+    private Integer profBonus;
     private HashSet<String> skillAndSaveProficiencies;
+    private Map<String, Integer> skillAndSaveModifiers;
     private Set<String> proficienciesAndLanguages;
+    private Map<String, String> skillNames = new HashMap<>();
 
     public Character(String name, BaseClass characterClass, Race characterRace, Background background, String alignment,
                      List<String> statNames) {
@@ -37,6 +39,7 @@ public class Character {
         setProfBonus();
         skillAndSaveProficiencies = setSkillAndSaveProficiencies();
         proficienciesAndLanguages = setProficienciesAndLanguages();
+        skillAndSaveModifiers = setSkillAndSaveModifiers();
     }
 
     private List<Integer> rollStats() {
@@ -127,9 +130,44 @@ public class Character {
         return proficienciesAndLanguages;
     }
 
+    private Map<String, Integer> setSkillAndSaveModifiers() {
+        Map<String, Integer> skillAndSaveModifiers = new HashMap<>();
+        skillNames.put("Acrobatics", "Dexterity");
+        skillNames.put("AnimalHandling", "Wisdom");
+        skillNames.put("Arcana", "Intelligence");
+        skillNames.put("Athletics", "Strength");
+        skillNames.put("Deception", "Charisma");
+        skillNames.put("History", "Intelligence");
+        skillNames.put("Insight", "Wisdom");
+        skillNames.put("Intimidation", "Charisma");
+        skillNames.put("Investigation", "Intelligence");
+        skillNames.put("Medicine", "Wisdom");
+        skillNames.put("Nature", "Intelligence");
+        skillNames.put("Perception", "Wisdom");
+        skillNames.put("Performance", "Charisma");
+        skillNames.put("Persuasion", "Charisma");
+        skillNames.put("Religion", "Intelligence");
+        skillNames.put("SleightOfHand", "Dexterity");
+        skillNames.put("Stealth", "Dexterity");
+        skillNames.put("Survival", "Wisdom");
+        skillNames.put("Strength", "Strength");
+        skillNames.put("Dexterity", "Dexterity");
+        skillNames.put("Constitution", "Constitution");
+        skillNames.put("Intelligence", "Intelligence");
+        skillNames.put("Wisdom", "Wisdom");
+        skillNames.put("Charisma", "Charisma");
+        for (String skill : skillNames.keySet()) {
+            if (skillAndSaveProficiencies.contains(skill)) {
+                skillAndSaveModifiers.put(skill, statModifiers.get(skillNames.get(skill)) + profBonus);
+            } else {
+                skillAndSaveModifiers.put(skill, statModifiers.get(skillNames.get(skill)));
+            }
+        }
+        return skillAndSaveModifiers;
+    }
+
     public void setProfBonus() {
-        int bonus = (int) Math.ceil((double) level / 4 + 1);
-        profBonus = "+" + bonus;
+        profBonus = (int) Math.ceil((double) level / 4 + 1);
     }
 
     public Map<String, Integer> getStatModifiers() {
@@ -168,7 +206,7 @@ public class Character {
         return characterRace.getSpeed();
     }
 
-    public String getProfBonus() {
+    public Integer getProfBonus() {
         return profBonus;
     }
 
@@ -182,5 +220,9 @@ public class Character {
 
     public HashSet<String> getFeaturesAndTraits() {
         return characterRace.getFeaturesAndTraits();
+    }
+
+    public Map<String, Integer> getSkillAndSaveModifiers() {
+        return skillAndSaveModifiers;
     }
 }
