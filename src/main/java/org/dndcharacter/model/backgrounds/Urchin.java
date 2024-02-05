@@ -3,7 +3,7 @@ package org.dndcharacter.model.backgrounds;
 public class Urchin extends Background{
 
     public Urchin() {
-        skills.add("Sleight of hand");
+        skills.add("SleightOfHand");
         skills.add("Stealth");
         proficiencies.add("Disguise kit");
         proficiencies.add("Thieves' tools");
