@@ -23,4 +23,8 @@ public abstract class BaseClass {
     public HashSet<String> getSkillAndSaveProficiencies() {
         return skillAndSaveProficiencies;
     }
+
+    public HashSet<String> getProficiencies() {
+        return proficiencies;
+    }
 }
