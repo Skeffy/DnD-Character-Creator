@@ -7,7 +7,7 @@ public class Barbarian extends BaseClass{
         hitDie = 12;
         savingThrows.add("Strength");
         savingThrows.add("Constitution");
-        skills.add("Animal Handling");
+        skills.add("AnimalHandling");
         skills.add("Athletics");
         skills.add("Intimidation");
         skills.add("Nature");
