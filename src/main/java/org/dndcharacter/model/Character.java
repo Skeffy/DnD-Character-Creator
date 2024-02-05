@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Character {
 
-    private int level = 5;
+    private int level = 1;
     private String hp;
     private BaseClass characterClass;
     private Race characterRace;
@@ -20,7 +20,7 @@ public class Character {
     private SplittableRandom random = new SplittableRandom();
     private String profBonus;
     private HashSet<String> skillAndSaveProficiencies;
-    private HashSet<String> languages;
+    private Set<String> proficienciesAndLanguages;
 
     public Character(String name, BaseClass characterClass, Race characterRace, Background background, String alignment,
                      List<String> statNames) {
@@ -36,7 +36,7 @@ public class Character {
         setHp();
         setProfBonus();
         skillAndSaveProficiencies = setSkillAndSaveProficiencies();
-        languages = setLanguages();
+        proficienciesAndLanguages = setProficienciesAndLanguages();
     }
 
     private List<Integer> rollStats() {
@@ -100,7 +100,7 @@ public class Character {
 
     private void setHp() {
         int hitPoints = characterClass.getHitDie() + statModifiers.get("Constitution");
-            if (level > 1) {
+        if (level > 1) {
             for (int i = 1; i < level; i++) {
                 int baseRoll = random.nextInt(1, characterClass.getHitDie());
                 int conMod = statModifiers.get("Constitution");
@@ -118,15 +118,17 @@ public class Character {
         return skillAndSaveProficiencies;
     }
 
-    private HashSet<String> setLanguages() {
-        HashSet<String> languages = new HashSet<>();
-        languages.addAll(characterRace.getLanguages());
-        languages.addAll(background.getLanguages());
-        return languages;
+    private Set<String> setProficienciesAndLanguages() {
+        Set<String> proficienciesAndLanguages = new LinkedHashSet<>();
+        proficienciesAndLanguages.addAll(characterRace.getLanguages());
+        proficienciesAndLanguages.addAll(background.getLanguages());
+        proficienciesAndLanguages.addAll(characterRace.getProficiencies());
+        proficienciesAndLanguages.addAll(characterClass.getProficiencies());
+        return proficienciesAndLanguages;
     }
 
     public void setProfBonus() {
-        int bonus = (int)Math.ceil((double)level/4 + 1);
+        int bonus = (int) Math.ceil((double) level / 4 + 1);
         profBonus = "+" + bonus;
     }
 
@@ -174,7 +176,11 @@ public class Character {
         return skillAndSaveProficiencies;
     }
 
-    public HashSet<String> getLanguages() {
-        return languages;
+    public Set<String> getProficienciesAndLanguages() {
+        return proficienciesAndLanguages;
+    }
+
+    public HashSet<String> getFeaturesAndTraits() {
+        return characterRace.getFeaturesAndTraits();
     }
 }
