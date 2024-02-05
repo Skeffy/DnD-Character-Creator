@@ -19,7 +19,7 @@ public class Character {
     private Map<String, Integer> statModifiers = new HashMap<>();
     private SplittableRandom random = new SplittableRandom();
     private String profBonus;
-    private HashSet<String> skillProficiencies;
+    private HashSet<String> skillAndSaveProficiencies;
     private HashSet<String> languages;
 
     public Character(String name, BaseClass characterClass, Race characterRace, Background background, String alignment,
@@ -35,7 +35,7 @@ public class Character {
         setStatModifiers();
         setHp();
         setProfBonus();
-        skillProficiencies = setSkillProficiencies();
+        skillAndSaveProficiencies = setSkillAndSaveProficiencies();
         languages = setLanguages();
     }
 
@@ -110,12 +110,12 @@ public class Character {
         hp = String.valueOf(hitPoints);
     }
 
-    private HashSet<String> setSkillProficiencies() {
-        HashSet<String> skillProficiencies = new HashSet<>();
-        skillProficiencies.addAll(characterClass.getSkills());
-        skillProficiencies.addAll(characterRace.getSkills());
-        skillProficiencies.addAll(background.getSkills());
-        return skillProficiencies;
+    private HashSet<String> setSkillAndSaveProficiencies() {
+        HashSet<String> skillAndSaveProficiencies = new HashSet<>();
+        skillAndSaveProficiencies.addAll(characterClass.getSkillAndSaveProficiencies());
+        skillAndSaveProficiencies.addAll(characterRace.getSkills());
+        skillAndSaveProficiencies.addAll(background.getSkills());
+        return skillAndSaveProficiencies;
     }
 
     private HashSet<String> setLanguages() {
@@ -170,8 +170,8 @@ public class Character {
         return profBonus;
     }
 
-    public HashSet<String> getSkillProficiencies() {
-        return skillProficiencies;
+    public HashSet<String> getSkillAndSaveProficiencies() {
+        return skillAndSaveProficiencies;
     }
 
     public HashSet<String> getLanguages() {

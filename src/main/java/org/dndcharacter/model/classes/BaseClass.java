@@ -10,7 +10,7 @@ public abstract class BaseClass {
     protected int level;
     protected int hitDie;
     protected HashSet<String> proficiencies = new HashSet<>();
-    protected HashSet<String> skillsAndSaveProficiencies = new HashSet<>();
+    protected HashSet<String> skillAndSaveProficiencies = new HashSet<>();
 
     public String getName() {
         return name;
@@ -20,7 +20,7 @@ public abstract class BaseClass {
         return hitDie;
     }
 
-    public HashSet<String> getSkills() {
-        return skillsAndSaveProficiencies;
+    public HashSet<String> getSkillAndSaveProficiencies() {
+        return skillAndSaveProficiencies;
     }
 }

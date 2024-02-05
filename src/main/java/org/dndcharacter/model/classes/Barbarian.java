@@ -5,14 +5,14 @@ public class Barbarian extends BaseClass{
     public Barbarian() {
         name = "Barbarian";
         hitDie = 12;
-        skillsAndSaveProficiencies.add("Strength");
-        skillsAndSaveProficiencies.add("Constitution");
-        skillsAndSaveProficiencies.add("AnimalHandling");
-        skillsAndSaveProficiencies.add("Athletics");
-        skillsAndSaveProficiencies.add("Intimidation");
-        skillsAndSaveProficiencies.add("Nature");
-        skillsAndSaveProficiencies.add("Perception");
-        skillsAndSaveProficiencies.add("Survival");
+        skillAndSaveProficiencies.add("Strength");
+        skillAndSaveProficiencies.add("Constitution");
+        skillAndSaveProficiencies.add("AnimalHandling");
+        skillAndSaveProficiencies.add("Athletics");
+        skillAndSaveProficiencies.add("Intimidation");
+        skillAndSaveProficiencies.add("Nature");
+        skillAndSaveProficiencies.add("Perception");
+        skillAndSaveProficiencies.add("Survival");
         proficiencies.add("Light Armor");
         proficiencies.add("Medium Armor");
         proficiencies.add("Shields");
