@@ -8,6 +8,7 @@ public class CharacterSheet {
     Map<String, String> textFields = new HashMap<>();
 
     public CharacterSheet(Character character) {
+        //general info
         textFields.put("CharacterName", character.getName());
         textFields.put("ClassLevel", character.getClassLevel());
         textFields.put("Background", character.getBackgroundName());
@@ -21,6 +22,7 @@ public class CharacterSheet {
         textFields.put("HPMax", character.getHp());
         textFields.put("HPCurrent", character.getHp());
 
+        //base stats and modifiers
         textFields.put("STR", character.getStats().get("Strength").toString());
         textFields.put("DEX", character.getStats().get("Dexterity").toString());
         textFields.put("CON", character.getStats().get("Constitution").toString());
@@ -34,6 +36,24 @@ public class CharacterSheet {
         textFields.put("WISmod", character.getStatModifiers().get("Wisdom").toString());
         textFields.put("CHAmod", character.getStatModifiers().get("Charisma").toString());
 
+        //saving throws and skills
+        for (String field : character.getSkillAndSaveProficiencies()) {
+            textFields.put(field + "CheckBox", "Yes");
+        }
+
+        //features and traits
+        String featuresAndTraits = "";
+        for (String feature : character.getFeaturesAndTraits()) {
+            featuresAndTraits += feature + " \n\n";
+        }
+        textFields.put("Features and Traits", featuresAndTraits);
+
+        //languages and proficiencies
+        String proficiencies = "";
+        for (String proficiency : character.getProficienciesAndLanguages()) {
+            proficiencies += proficiency + " \n";
+        }
+        textFields.put("ProficienciesLang", proficiencies);
     }
 
     public Map<String, String> getTextFields() {
