@@ -1,6 +1,7 @@
 package org.dndcharacter.model.classes;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public abstract class BaseClass {
@@ -8,10 +9,8 @@ public abstract class BaseClass {
     protected String name;
     protected int level;
     protected int hitDie;
-    protected int proficiencyBonus;
-    protected List<String> proficiencies = new ArrayList<>();
-    protected List<String> savingThrows = new ArrayList<>();
-    protected List<String> skills = new ArrayList<>();
+    protected HashSet<String> proficiencies = new HashSet<>();
+    protected HashSet<String> skillsAndSaveProficiencies = new HashSet<>();
 
     public String getName() {
         return name;
@@ -21,7 +20,7 @@ public abstract class BaseClass {
         return hitDie;
     }
 
-    public List<String> getSkills() {
-        return skills;
+    public HashSet<String> getSkills() {
+        return skillsAndSaveProficiencies;
     }
 }
