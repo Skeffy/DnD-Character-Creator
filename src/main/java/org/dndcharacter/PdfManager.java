@@ -29,8 +29,6 @@ public class PdfManager {
             charSheet = Loader.loadPDF(TEMPLATE_PATH);
             PDDocumentCatalog catalog = charSheet.getDocumentCatalog();
             acro = catalog.getAcroForm();
-            //PDTextField pdTextField = new PDTextField(acro);
-            //pdTextField.getDefaultAppearance();
         } catch (IOException e) {
             System.out.println("Unable to load template character sheet --" + e.getMessage());
         }
