@@ -1,8 +1,7 @@
 package org.dndcharacter.model.races;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 
 public abstract class Race {
@@ -11,11 +10,11 @@ public abstract class Race {
     protected String speed;
     protected String size;
     protected Map<String, Integer> abilityScoreRacialModifier = new HashMap<>();
-    protected List<String> languages = new ArrayList<>();
+    protected HashSet<String> languages = new HashSet<>();
     protected String subrace = null;
-    protected List<String> proficiencies = new ArrayList<>();
-    protected List<String> featuresAndTraits = new ArrayList<>();
-    protected List<String> skills = new ArrayList<>();
+    protected HashSet<String> proficiencies = new HashSet<>();
+    protected HashSet<String> featuresAndTraits = new HashSet<>();
+    protected HashSet<String> skills = new HashSet<>();
 
     public boolean hasSubrace() {
         return subrace != null;
@@ -37,7 +36,7 @@ public abstract class Race {
         return speed;
     }
 
-    public List<String> getSkills() {
+    public HashSet<String> getSkills() {
         return skills;
     }
 
@@ -45,15 +44,15 @@ public abstract class Race {
         return size;
     }
 
-    public List<String> getLanguages() {
+    public HashSet<String> getLanguages() {
         return languages;
     }
 
-    public List<String> getProficiencies() {
+    public HashSet<String> getProficiencies() {
         return proficiencies;
     }
 
-    public List<String> getFeaturesAndTraits() {
+    public HashSet<String> getFeaturesAndTraits() {
         return featuresAndTraits;
     }
 }
