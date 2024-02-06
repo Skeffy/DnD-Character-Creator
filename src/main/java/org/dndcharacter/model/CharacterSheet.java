@@ -42,18 +42,18 @@ public class CharacterSheet {
         }
 
         //features and traits
-        String featuresAndTraits = "";
+        StringBuilder featuresAndTraits = new StringBuilder();
         for (String feature : character.getFeaturesAndTraits()) {
-            featuresAndTraits += feature + " \n\n";
+            featuresAndTraits.append(feature).append(" \n\n");
         }
-        characterData.put("Features and Traits", featuresAndTraits);
+        characterData.put("Features and Traits", featuresAndTraits.toString());
 
         //languages and proficiencies
-        String proficiencies = "";
+        StringBuilder proficiencies = new StringBuilder();
         for (String proficiency : character.getProficienciesAndLanguages()) {
-            proficiencies += proficiency + " \n";
+            proficiencies.append(proficiency).append(" \n");
         }
-        characterData.put("ProficienciesLang", proficiencies);
+        characterData.put("ProficienciesLang", proficiencies.toString());
 
         //saving throw and skill modifiers
         for (String skill : character.getSkillAndSaveModifiers().keySet()) {
