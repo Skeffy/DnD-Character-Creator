@@ -1,2 +1,4 @@
-package org.dndcharacter;public class Console {
+package org.dndcharacter;
+
+public class Console {
 }

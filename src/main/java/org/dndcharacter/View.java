@@ -1,2 +1,4 @@
-package org.dndcharacter;public class View {
+package org.dndcharacter;
+
+public class View {
 }
