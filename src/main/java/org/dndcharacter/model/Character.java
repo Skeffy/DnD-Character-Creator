@@ -8,21 +8,21 @@ import java.util.*;
 
 public class Character {
 
-    private int level = 1;
-    private String hp;
-    private BaseClass characterClass;
-    private Race characterRace;
-    private String name;
-    private Background background;
-    private String alignment;
-    private Map<String, Integer> stats = new HashMap<>();
-    private Map<String, Integer> statModifiers = new HashMap<>();
-    private SplittableRandom random = new SplittableRandom();
+    private final String name;
+    private final int level = 1;
+    private final String alignment;
+    private final BaseClass characterClass;
+    private final Race characterRace;
+    private final Background background;
+    private final Map<String, Integer> stats = new HashMap<>();
+    private final Map<String, Integer> statModifiers = new HashMap<>();
+    private final Set<String> proficienciesAndLanguages;
+    private final HashSet<String> skillAndSaveProficiencies;
+    private final Map<String, Integer> skillAndSaveModifiers;
+    private final Map<String, String> skillNames = new HashMap<>();
+    private final SplittableRandom random = new SplittableRandom();
     private Integer profBonus;
-    private HashSet<String> skillAndSaveProficiencies;
-    private Map<String, Integer> skillAndSaveModifiers;
-    private Set<String> proficienciesAndLanguages;
-    private Map<String, String> skillNames = new HashMap<>();
+    private String hp;
 
     public Character(String name, BaseClass characterClass, Race characterRace, Background background, String alignment,
                      List<String> statNames) {
@@ -156,12 +156,17 @@ public class Character {
         skillNames.put("Intelligence", "Intelligence");
         skillNames.put("Wisdom", "Wisdom");
         skillNames.put("Charisma", "Charisma");
+        skillNames.put("PassivePerception", "Wisdom");
         for (String skill : skillNames.keySet()) {
+            Integer modifier = 0;
             if (skillAndSaveProficiencies.contains(skill)) {
-                skillAndSaveModifiers.put(skill, statModifiers.get(skillNames.get(skill)) + profBonus);
-            } else {
-                skillAndSaveModifiers.put(skill, statModifiers.get(skillNames.get(skill)));
+                modifier += profBonus;
             }
+            if (skillAndSaveProficiencies.contains("Perception") && skill.equals("PassivePerception")) {
+                modifier += profBonus + 10;
+            }
+            modifier += statModifiers.get(skillNames.get(skill));
+            skillAndSaveModifiers.put(skill, modifier);
         }
         return skillAndSaveModifiers;
     }
