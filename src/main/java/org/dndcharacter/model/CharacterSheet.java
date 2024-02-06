@@ -61,7 +61,7 @@ public class CharacterSheet {
         }
     }
 
-    public Map<String, String> getTextFields() {
+    public Map<String, String> getCharacterData() {
         return characterData;
     }
 }
