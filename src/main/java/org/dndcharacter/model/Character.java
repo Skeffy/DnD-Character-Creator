@@ -9,24 +9,25 @@ import java.util.*;
 public class Character {
 
     private final String name;
-    private final int level = 1;
+    private final int level;
     private final String alignment;
     private final BaseClass characterClass;
     private final Race characterRace;
     private final Background background;
     private final Map<String, Integer> stats = new HashMap<>();
-    private final Map<String, Integer> statModifiers = new HashMap<>();
+    private final Map<String, Integer> statModifiers;
     private final Set<String> proficienciesAndLanguages;
     private final HashSet<String> skillAndSaveProficiencies;
     private final Map<String, Integer> skillAndSaveModifiers;
     private final Map<String, String> skillNames = new HashMap<>();
     private final SplittableRandom random = new SplittableRandom();
-    private Integer profBonus;
-    private String hp;
+    private final Integer profBonus;
+    private final String hp;
 
-    public Character(String name, BaseClass characterClass, Race characterRace, Background background, String alignment,
+    public Character(String name, int level, BaseClass characterClass, Race characterRace, Background background, String alignment,
                      List<String> statNames) {
         this.name = name;
+        this.level = level;
         this.characterClass = characterClass;
         this.characterRace = characterRace;
         this.background = background;
@@ -34,9 +35,9 @@ public class Character {
         List<Integer> unassignedStats = rollStats();
         assignStats(statNames, unassignedStats);
         modifyStats();
-        setStatModifiers();
-        setHp();
-        setProfBonus();
+        statModifiers = setStatModifiers();
+        hp = setHp();
+        profBonus = setProfBonus();
         skillAndSaveProficiencies = setSkillAndSaveProficiencies();
         proficienciesAndLanguages = setProficienciesAndLanguages();
         skillAndSaveModifiers = setSkillAndSaveModifiers();
@@ -61,10 +62,10 @@ public class Character {
         return unassignedStats;
     }
 
-    private void assignStats(List<String> statNames, List<Integer> unassignedStata) {
+    private void assignStats(List<String> statNames, List<Integer> unassignedStats) {
         int statNumber = 0;
         for (String stat : statNames) {
-            stats.put(stat, unassignedStata.get(statNumber));
+            stats.put(stat, unassignedStats.get(statNumber));
             statNumber++;
         }
     }
@@ -77,7 +78,8 @@ public class Character {
         }
     }
 
-    private void setStatModifiers() {
+    private Map<String, Integer> setStatModifiers() {
+        Map<String, Integer> statModifiers = new HashMap<>();
         for (String stat : stats.keySet()) {
             if (stats.get(stat) <= 5) {
                 statModifiers.put(stat, -3);
@@ -99,9 +101,10 @@ public class Character {
                 statModifiers.put(stat, 5);
             }
         }
+        return statModifiers;
     }
 
-    private void setHp() {
+    private String setHp() {
         int hitPoints = characterClass.getHitDie() + statModifiers.get("Constitution");
         if (level > 1) {
             for (int i = 1; i < level; i++) {
@@ -110,7 +113,7 @@ public class Character {
                 hitPoints += baseRoll + conMod;
             }
         }
-        hp = String.valueOf(hitPoints);
+        return String.valueOf(hitPoints);
     }
 
     private HashSet<String> setSkillAndSaveProficiencies() {
@@ -171,8 +174,8 @@ public class Character {
         return skillAndSaveModifiers;
     }
 
-    public void setProfBonus() {
-        profBonus = (int) Math.ceil((double) level / 4 + 1);
+    public Integer setProfBonus() {
+        return (int)Math.ceil((double) level / 4 + 1);
     }
 
     public Map<String, Integer> getStatModifiers() {
